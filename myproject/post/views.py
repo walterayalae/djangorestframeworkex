@@ -8,7 +8,7 @@ from post.serializer import PostSerializer
 
 # Create your views here.
 def post(request, post_id):
-    return render(request, 'post.html', {'id':post_id})
+    return render(request, 'post/post.html', {'id':post_id})
 
 class PostList(generics.ListCreateAPIView):
 
