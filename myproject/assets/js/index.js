@@ -1,16 +1,19 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
+import React from 'react';
+import ReactDOM from 'react-dom';
+import fetch from 'isomorphic-fetch';
+import promise from 'es6-promise';
+import 'babel-polyfill';
 
 var BooksList = React.createClass({
+
     loadBooksFromServer: function(){
-        $.ajax({
-            url: 'http://127.0.0.1:8000/post/api/1',
-            datatype: 'json',
-            cache: false,
-            success: function(data) {
-                this.setState({data: data});
-            }.bind(this)
-        })
+      fetch('http://127.0.0.1:8000/post/api/1', { method: "GET"})
+        .then(response => response.json())
+        .then(books => {
+          this.setState({
+            data:books
+          })
+        });
     },
 
     getInitialState: function() {
@@ -21,8 +24,8 @@ var BooksList = React.createClass({
         this.loadBooksFromServer();
 
     },
-    render: function() {
 
+    render: function() {
 
         return (
             <div>
